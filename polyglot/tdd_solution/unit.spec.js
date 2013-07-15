@@ -13,26 +13,31 @@ function polyglot( number ) {
     keywords[1000] = 'thousand';
 
     function renderDoubleDigits(number) {
-        var nearest_ten = 10 * Math.floor(number / 10);
-        if (nearest_ten > 0) {
-            return keywords[nearest_ten] + " " + keywords[number - nearest_ten];
+        var n_ten = Math.floor(number / 10);
+        if (n_ten > 0) {
+            return keywords[10*n_ten] + ' ' + keywords[number - 10*n_ten];
         }
         else {
-            return keywords[number - nearest_ten];
+            return keywords[number - 10*n_ten];
         }
     }
 
     var words = "";
 
-    if (number >= 1000) {
-        var n_thousands =  Math.floor(number/1000);
-        words = renderDoubleDigits(n_thousands) + ' ' + keywords[1000];
-        if ( number%1000 > 0) { words = words + " and " + renderDoubleDigits(number - n_thousands*1000); }
-    }
-    else if ( number >= 100 ) {
-        var n_hundreds = Math.floor(number/100);
-        words = renderDoubleDigits(n_hundreds) + ' ' + keywords[100];
-        if ( number%100 > 0) { words = words + " and " + renderDoubleDigits(number - n_hundreds*100); }
+    if (number >=100) {
+        var first_digit = 0;
+        var factor = 0;
+        if (number >= 1000) {
+            factor = 1000;
+            first_digit =  Math.floor(number/factor);
+        }
+        else {
+            factor = 100;
+            first_digit =  Math.floor(number/factor);
+        }
+
+        words = renderDoubleDigits(first_digit) + ' ' + keywords[factor];
+        if ( number%factor > 0) { words = words + " and " + renderDoubleDigits(number - first_digit*factor); }
     }
     else
     {
