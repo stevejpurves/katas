@@ -39,10 +39,13 @@ function polyglot( number ) {
         words = renderDoubleDigits(first_digit) + ' ' + keywords[factor];
         if ( number%factor > 0) { words = words + " and " + renderDoubleDigits(number - first_digit*factor); }
     }
+    else if (number >= 10) {
+        if (keywords[number] !== undefined) { words = keywords[number] }
+        else { words = renderDoubleDigits(number); }
+    }
     else
     {
-        if (number < 21 || number < 99 && number%10 === 0) { words = keywords[number]; }
-        else { words = renderDoubleDigits(number); }
+        words = keywords[number];
     }
 
     return words;
