@@ -41,7 +41,9 @@ function polyglot( number ) {
     }
     else if (number >= 10) {
         if (keywords[number] !== undefined) { words = keywords[number] }
-        else { words = renderDoubleDigits(number); }
+        else {
+            words = renderDoubleDigits(number);
+        }
     }
     else
     {
