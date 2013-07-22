@@ -12,15 +12,10 @@ function polyglot( number ) {
     keywords[100] = 'hundred';
     keywords[1000] = 'thousand';
 
-    function renderDoubleDigits(number) {
-        var n_ten = Math.floor(number / 10);
-        if (n_ten > 0) {
-            return keywords[10*n_ten] + ' ' + keywords[number - 10*n_ten];
-        }
-        else {
-            return keywords[number - 10*n_ten];
-        }
+    function recu(number) {
+        return keywords[number];
     }
+
 
     var words = "";
 
@@ -36,18 +31,40 @@ function polyglot( number ) {
             first_digit =  Math.floor(number/factor);
         }
 
-        words = renderDoubleDigits(first_digit) + ' ' + keywords[factor];
-        if ( number%factor > 0) { words = words + " and " + renderDoubleDigits(number - first_digit*factor); }
+        var n_ten = Math.floor(first_digit / 10);
+        if (n_ten > 0) {
+            words = words + keywords[10*n_ten] + ' ' + keywords[first_digit - 10*n_ten];
+        }
+        else {
+            words = words + keywords[first_digit - 10*n_ten];
+        }
+
+        words = words + ' ' + keywords[factor];
+
+        if ( number%factor > 0) {
+            words = words + " and ";
+
+            var n_ten = Math.floor((number - first_digit*factor) / 10);
+            if (n_ten > 0) {
+                words = words + keywords[10*n_ten] + ' ' + keywords[number - first_digit*factor - 10*n_ten];
+            }
+            else {
+                words = words + keywords[number - first_digit*factor - 10*n_ten];
+            }
+        }
     }
     else if (number >= 10) {
-        if (keywords[number] !== undefined) { words = keywords[number] }
+        if (keywords[number] !== undefined) {
+            words = recu(number);
+        }
         else {
-            words = renderDoubleDigits(number);
+            var n_ten = Math.floor(number / 10);
+            words = keywords[10*n_ten] + ' ' + keywords[number - 10*n_ten];
         }
     }
     else
     {
-        words = keywords[number];
+        words = recu(number);
     }
 
     return words;
@@ -120,6 +137,7 @@ describe("when transforming Numbers to Words",function(){
         it("one thousand", function(){
             expect( polyglot( 1000 )).toBe("one thousand");
         });
+
 
         it("two thousand", function(){
             expect( polyglot( 2000 )).toBe("two thousand");
