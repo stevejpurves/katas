@@ -39,7 +39,7 @@ function polyglot( number ) {
             words = words + keywords[first_digit - 10*n_ten];
         }
 
-        words = words + ' ' + keywords[factor];
+        words = words + ' ' + recu(factor);
 
         if ( number%factor > 0) {
             words = words + " and ";
