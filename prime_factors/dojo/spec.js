@@ -1,3 +1,12 @@
+/*
+	This is a solution of the prime factors coded during a group dojo with 
+	@carlosble and @kabomi5 here: http://www.carlosble.com/2013/08/configuring-targus-keyboard/
+
+	The solution came out of a TDD small step approach, that got messy. We backed out of that and decided
+	to head toward a recursive design which resulted in this pretty quickly.
+*/
+
+
 chai = require('chai');
 should = chai.should();
 //chai.Assertion.includeStack = true;
@@ -8,7 +17,8 @@ function isDivisibleBy(n, divisor) {
 
 function primes (n){
     var i = 2;
-    while (i < n) {
+	var largest_possible_factor = n/2;
+    while (i < largest_possible_factor + 1) {
         if (isDivisibleBy(n, i))
             return [i].concat(primes(n/i));
         i++;
