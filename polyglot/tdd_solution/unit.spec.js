@@ -12,8 +12,15 @@ function polyglot( number ) {
     keywords[100] = 'hundred';
     keywords[1000] = 'thousand';
 
-    function recu(number) {
-        return keywords[number];
+    function recu(words, number) {
+        if (number >= 10) {
+            var tens = Math.floor(number / 10);
+            words = keywords[10 * tens];
+            return recu(words, number - 10*tens);
+        }
+        else {
+            return words + keywords[number];
+        }
     }
 
 
@@ -39,7 +46,7 @@ function polyglot( number ) {
             words = words + keywords[first_digit - 10*n_ten];
         }
 
-        words = words + ' ' + recu(factor);
+        words = words + ' ' + keywords[factor];
 
         if ( number%factor > 0) {
             words = words + " and ";
@@ -55,7 +62,7 @@ function polyglot( number ) {
     }
     else if (number >= 10) {
         if (keywords[number] !== undefined) {
-            words = recu(number);
+            words = words + keywords[number];
         }
         else {
             var n_ten = Math.floor(number / 10);
@@ -64,7 +71,7 @@ function polyglot( number ) {
     }
     else
     {
-        words = recu(number);
+        words = recu(words, number);
     }
 
     return words;
