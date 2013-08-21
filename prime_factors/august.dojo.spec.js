@@ -16,36 +16,33 @@ function isDivisibleBy(n, divisor) {
 }
 
 function primes (n){
-    var i = 2;
-	var largest_possible_factor = n/2;
-    while (i < largest_possible_factor + 1) {
+    for (var i = 2;i < n/2 + 1;i++)
         if (isDivisibleBy(n, i))
             return [i].concat(primes(n/i));
-        i++;
-    }
     return [n];
 }
-
-function primeFactorsAre(expected){
-  return {for: function(n){
-      var actual = primes(n);
-      if (actual.length !== expected.length) {
-          console.log("different lengths", actual, expected);
-          actual.length.should.equal(expected.length);
-      }
-      for (var i = 0; i < actual.length; i++){
-        if (actual[i] !== expected[i]) {
-            console.log(actual, expected);
-            actual[i].should.equal(expected[i]);
-        }
-      }
-     }
-   }
-  }
 
 
 
 describe("prime factors kata", function(){
+
+	function primeFactorsAre(expected){
+	  return {for: function(n){
+		  var actual = primes(n);
+		  if (actual.length !== expected.length) {
+			  console.log("different lengths", actual, expected);
+			  actual.length.should.equal(expected.length);
+		  }
+		  for (var i = 0; i < actual.length; i++){
+			if (actual[i] !== expected[i]) {
+				console.log(actual, expected);
+				actual[i].should.equal(expected[i]);
+			}
+		  }
+		 }
+	   }
+	  }
+
   it("knows that 2 is prime", function(){
      primeFactorsAre([2]).for(2);
   });
