@@ -1,6 +1,8 @@
 
 function numbers_to_words( number ) {
-	words = ["","one","two","three"];
+	words = ["","one","two","three", "four", "five","six","seven","eight",
+	"nine","ten","eleven","twelve","thirteen","fourteen","fifteen","sizteen",
+	"seventeen","eighteen","nineteen","twenty"];
 	return words[number];
 }
 
@@ -15,8 +17,8 @@ describe("when converting numbers to words", function(){
 			expect( numbers_to_words(2) ).toBe("two");
 		});
 		
-		it("three", function(){
-			expect( numbers_to_words(3) ).toBe("three");
+		it("twenty", function(){
+			expect( numbers_to_words(20) ).toBe("twenty");
 		});
 	});
 });
