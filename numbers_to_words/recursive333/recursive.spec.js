@@ -4,6 +4,13 @@ function numbers_to_words( number ) {
 	"nine","ten","eleven","twelve","thirteen","fourteen","fifteen","sizteen",
 	"seventeen","eighteen","nineteen","twenty"];
 	words[30] = "thirty";
+	words[40] = "forty";
+	words[50] = "fifty";
+	words[60] = "sixty";
+	words[70] = "seventy";
+	words[80] = "eighty";
+	words[90] = "ninety";
+
 	if (words[number] === undefined)
 		return numbers_to_words(20) + " " + numbers_to_words(number-20);
 	return words[number];
