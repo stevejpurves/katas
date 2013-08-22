@@ -21,4 +21,10 @@ describe("when converting numbers to words", function(){
 			expect( numbers_to_words(20) ).toBe("twenty");
 		});
 	});
+	
+	describe("other numbers", function(){
+		it("twenty one", function(){
+			expect( numbers_to_words(21) ).toBe("twenty one");
+		});
+	});
 });
