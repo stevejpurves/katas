@@ -1,8 +1,10 @@
 
 function numbers_to_words( number ) {
-	words = ["","one","two","three", "four", "five","six","seven","eight",
+	var words = ["","one","two","three", "four", "five","six","seven","eight",
 	"nine","ten","eleven","twelve","thirteen","fourteen","fifteen","sizteen",
 	"seventeen","eighteen","nineteen","twenty"];
+	if (number > 20)
+		return words[20] + " " + words[number-20];
 	return words[number];
 }
 
