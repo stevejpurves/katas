@@ -11,11 +11,13 @@ function numbers_to_words( number ) {
 	words[80] = "eighty";
 	words[90] = "ninety";
 
-	if (words[number] === undefined) {
-		var tens = 10 * Math.floor( number / 10 );
-		return numbers_to_words(tens) + " " + numbers_to_words(number-tens);
-	}
-	return words[number];
+	
+	
+	if (words[number] !== undefined) 
+		return words[number];
+	
+	var tens = 10 * Math.floor( number / 10 );
+	return numbers_to_words(tens) + " " + numbers_to_words(number-tens);	
 }
 
 describe("when converting numbers to words", function(){
