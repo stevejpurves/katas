@@ -28,5 +28,8 @@ describe("when converting numbers to words", function(){
 		it("twenty one", function(){
 			expect( numbers_to_words(21) ).toBe("twenty one");
 		});
+		it("thirty one", function(){
+			expect( numbers_to_words(31) ).toBe("thirty one");
+		});
 	});
 });
