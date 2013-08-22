@@ -46,5 +46,9 @@ describe("when converting numbers to words", function(){
 		it("thirty one", function(){
 			expect( numbers_to_words(31) ).toBe("thirty one");
 		});
+		
+		it("ninety nine", function(){
+			expect( numbers_to_words(99) ).toBe("ninety nine");
+		});		
 	});
 });
