@@ -4,7 +4,7 @@ function numbers_to_words( number ) {
 	"nine","ten","eleven","twelve","thirteen","fourteen","fifteen","sizteen",
 	"seventeen","eighteen","nineteen","twenty"];
 	if (number > 20)
-		return words[20] + " " + words[number-20];
+		return words[20] + " " + numbers_to_words(number-20);
 	return words[number];
 }
 
