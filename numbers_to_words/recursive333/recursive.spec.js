@@ -22,12 +22,14 @@ function numbers_to_words( number ) {
     var words = "";
     if (number >= 100) {
         words = keywords[hundreds] + " hundred";
-        if ( number - 100*hundreds > 0 ) {
-            words = words + " and " + numbers_to_words( number - 100*hundreds );
+        var remainder = number - 100*hundreds;
+        if ( remainder > 0 ) {
+            words = words + " and " + numbers_to_words( remainder );
         }
     }
     else {
-        words = keywords[10 * tens] + " " + keywords[number - 10*tens];
+        var remainder = number - 10*tens;
+        words = keywords[10 * tens] + " " + keywords[remainder];
     }
 
     return words;
