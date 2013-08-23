@@ -20,10 +20,15 @@ function numbers_to_words( number ) {
     var tens = Math.floor( number / 10 );
 
     var words = "";
-    if (number >= 100)
+    if (number >= 100) {
         words = keywords[hundreds] + " hundred";
-    else
+        if ( number - 100*hundreds > 0 ) {
+            words = words + " and " + numbers_to_words( number - 100*hundreds );
+        }
+    }
+    else {
         words = keywords[10 * tens] + " " + keywords[number - 10*tens];
+    }
 
     return words;
 }
