@@ -10,13 +10,13 @@ function numbers_to_words( number ) {
 	words[70] = "seventy";
 	words[80] = "eighty";
 	words[90] = "ninety";
-
+    words[100] = "one hundred"
 
 	if (words[number] !== undefined) 
 		return words[number];
 	
 	var tens = 10 * Math.floor( number / 10 );
-	return numbers_to_words(tens) + " " + numbers_to_words(number-tens);	
+	return numbers_to_words(tens) + " " + numbers_to_words(number-tens);
 }
 
 describe("when converting numbers to words", function(){
@@ -50,6 +50,10 @@ describe("when converting numbers to words", function(){
 		
 		it("ninety nine", function(){
 			expect( numbers_to_words(99) ).toBe("ninety nine");
-		});		
+		});
+
+        it("one hundred", function(){
+            expect( numbers_to_words(100)).toBe("one hundred");
+        });
 	});
 });
