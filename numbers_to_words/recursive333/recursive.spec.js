@@ -16,9 +16,16 @@ function numbers_to_words( number ) {
     separator[100] = " and ";
 
     var words = "";
+
+    var thousands = Math.floor( number / 1000 );
+    if (number >= 1000) {
+        words += keywords[thousands] + " thousand";
+        number -= 1000*thousands;
+    }
+
     var hundreds = Math.floor( number / 100 );
     if (number >= 100) {
-        words = keywords[hundreds] + " hundred";
+        words += keywords[hundreds] + " hundred";
         number -= 100*hundreds;
         if ( number > 0 )
             words += separator[100];
@@ -77,6 +84,10 @@ describe("when converting numbers to words", function(){
         it("two hundred", function(){
             expect( numbers_to_words(200)).toBe("two hundred");
         });
+
+        it("one thousand", function(){
+            expect( numbers_to_words(1000)).toBe("one thousand");
+        });
 	});
 
     describe("other expressions contain the word 'and'", function() {
@@ -87,6 +98,7 @@ describe("when converting numbers to words", function(){
         it("nine hundred and ninety nine", function(){
             expect( numbers_to_words(999)).toBe("nine hundred and ninety nine");
         });
+
 
     });
 });
