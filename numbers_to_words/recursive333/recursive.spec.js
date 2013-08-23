@@ -11,22 +11,17 @@ function numbers_to_words( number ) {
     keywords[80] = "eighty";
     keywords[90] = "ninety";
 
-
-
-//	if (keywords[number] !== undefined)
-//		return keywords[number];
+    var words = "";
 
     var hundreds = Math.floor( number / 100 );
-    var tens = Math.floor( number / 10 );
-
-    var words = "";
     if (number >= 100) {
         words = keywords[hundreds] + " hundred";
         number = number - 100*hundreds;
         if ( number > 0 )
-            words = words + " and ";// + numbers_to_words( remainder );
+            words += " and ";
     }
 
+    var tens = Math.floor( number / 10 );
     if (number >= 10) {
         words += keywords[10 * tens];
         number = number - 10*tens;
@@ -85,5 +80,10 @@ describe("when converting numbers to words", function(){
         it("one hundred and one", function(){
             expect( numbers_to_words(101)).toBe("one hundred and one");
         });
+
+        it("nine hundred and ninety nine", function(){
+            expect( numbers_to_words(999)).toBe("nine hundred and ninety nine");
+        });
+
     });
 });
