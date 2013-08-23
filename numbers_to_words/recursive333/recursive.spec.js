@@ -13,8 +13,8 @@ function numbers_to_words( number ) {
 
 
 
-	if (keywords[number] !== undefined)
-		return keywords[number];
+//	if (keywords[number] !== undefined)
+//		return keywords[number];
 
     var hundreds = Math.floor( number / 100 );
     var tens = Math.floor( number / 10 );
@@ -22,15 +22,16 @@ function numbers_to_words( number ) {
     var words = "";
     if (number >= 100) {
         words = keywords[hundreds] + " hundred";
-        var number = number - 100*hundreds;
-        if ( number > 0 ) {
+        number = number - 100*hundreds;
+        if ( number > 0 )
             words = words + " and ";// + numbers_to_words( remainder );
-        }
     }
 
     if (number >= 10) {
-        var number = number - 10*tens;
-        words += keywords[10 * tens] + " ";
+        words += keywords[10 * tens];
+        number = number - 10*tens;
+        if ( number > 0 )
+            words += " ";
     }
 
     words += keywords[number];
