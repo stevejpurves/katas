@@ -12,17 +12,24 @@ function numbers_to_words( number ) {
     keywords[90] = "ninety";
 
 
+
 	if (keywords[number] !== undefined)
 		return keywords[number];
 
+    var hundreds = Math.floor( number / 100 );
+    var tens = Math.floor( number / 10 );
+
+    var words = "";
+
     if (number >= 100) {
-        var hundreds = Math.floor( number / 100 );
-        return keywords[hundreds] + " hundred";
+        words = keywords[hundreds] + " hundred";
     }
-    if (number >= 10) {
-        var tens = 10 * Math.floor( number / 10 );
-        return keywords[tens] + " " + keywords[number - tens];
+    else
+    {
+        words = keywords[10 * tens] + " " + keywords[number - 10*tens];
     }
+
+    return words;
 }
 
 describe("when converting numbers to words", function(){
