@@ -11,22 +11,25 @@ function numbers_to_words( number ) {
     keywords[80] = "eighty";
     keywords[90] = "ninety";
 
-    var words = "";
+    var separator = [""];
+    separator[10] = " ";
+    separator[100] = " and ";
 
+    var words = "";
     var hundreds = Math.floor( number / 100 );
     if (number >= 100) {
         words = keywords[hundreds] + " hundred";
-        number = number - 100*hundreds;
+        number -= 100*hundreds;
         if ( number > 0 )
-            words += " and ";
+            words += separator[100];
     }
 
     var tens = Math.floor( number / 10 );
     if (number >= 10) {
         words += keywords[10 * tens];
-        number = number - 10*tens;
+        number -= 10*tens;
         if ( number > 0 )
-            words += " ";
+            words += separator[10];
     }
 
     words += keywords[number];
