@@ -20,21 +20,17 @@ function numbers_to_words( number ) {
     var tens = Math.floor( number / 10 );
 
     var words = "";
-
-    if (number >= 100) {
+    if (number >= 100)
         words = keywords[hundreds] + " hundred";
-    }
     else
-    {
         words = keywords[10 * tens] + " " + keywords[number - 10*tens];
-    }
 
     return words;
 }
 
 describe("when converting numbers to words", function(){
 
-	describe("some numbers map to single words", function(){
+	describe("some numbers are expressed with one word", function(){
 		it ("one", function(){
 			expect( numbers_to_words(1) ).toBe("one");
 		});
@@ -52,7 +48,7 @@ describe("when converting numbers to words", function(){
 		});
 	});
 	
-	describe("other numbers", function(){
+	describe("other numbers expressed in two words", function(){
 		it("twenty one", function(){
 			expect( numbers_to_words(21) ).toBe("twenty one");
 		});
@@ -73,4 +69,10 @@ describe("when converting numbers to words", function(){
             expect( numbers_to_words(200)).toBe("two hundred");
         });
 	});
+
+    describe("other expressions contain the word 'and'", function() {
+        it("one hundred and one", function(){
+            expect( numbers_to_words(101)).toBe("one hundred and one");
+        });
+    });
 });
