@@ -1,27 +1,28 @@
 
 function numbers_to_words( number ) {
-	var words = ["","one","two","three", "four", "five","six","seven","eight",
+	var keywords = ["","one","two","three", "four", "five","six","seven","eight",
 	"nine","ten","eleven","twelve","thirteen","fourteen","fifteen","sixteen",
 	"seventeen","eighteen","nineteen","twenty"];
-	words[30] = "thirty";
-	words[40] = "forty";
-	words[50] = "fifty";
-	words[60] = "sixty";
-	words[70] = "seventy";
-	words[80] = "eighty";
-	words[90] = "ninety";
+    keywords[30] = "thirty";
+    keywords[40] = "forty";
+    keywords[50] = "fifty";
+    keywords[60] = "sixty";
+    keywords[70] = "seventy";
+    keywords[80] = "eighty";
+    keywords[90] = "ninety";
 
 
-	if (words[number] !== undefined) 
-		return words[number];
+	if (keywords[number] !== undefined)
+		return keywords[number];
 
     if (number >= 100) {
         var hundreds = Math.floor( number / 100 );
-        return numbers_to_words( hundreds ) + " hundred";
+        return keywords[hundreds] + " hundred";
     }
-
-    var tens = 10 * Math.floor( number / 10 );
-    return numbers_to_words(tens) + " " + numbers_to_words( number - tens );
+    if (number >= 10) {
+        var tens = 10 * Math.floor( number / 10 );
+        return keywords[tens] + " " + keywords[number - tens];
+    }
 }
 
 describe("when converting numbers to words", function(){
