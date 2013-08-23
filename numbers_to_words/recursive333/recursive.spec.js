@@ -17,26 +17,20 @@ function numbers_to_words( number ) {
 
     var words = "";
 
-    var thousands = Math.floor( number / 1000 );
-    if (number >= 1000) {
-        words += keywords[thousands] + " thousand";
-        number -= 1000*thousands;
-    }
-
-    var hundreds = Math.floor( number / 100 );
-    if (number >= 100) {
-        words += keywords[hundreds] + " hundred";
-        number -= 100*hundreds;
-        if ( number > 0 )
-            words += separator[100];
-    }
-
-    var tens = Math.floor( number / 10 );
-    if (number >= 10) {
-        words += keywords[10 * tens];
-        number -= 10*tens;
-        if ( number > 0 )
-            words += separator[10];
+    var order_of_magnitude = 1000;
+    for (var order_of_magnitude = 1000; order_of_magnitude > 1; order_of_magnitude /= 10) {
+        var multiplier = Math.floor( number / order_of_magnitude );
+        if (number >= order_of_magnitude) {
+            if (order_of_magnitude === 1000)
+                words += keywords[multiplier] + " thousand";
+            if (order_of_magnitude === 100)
+                words += keywords[multiplier] + " hundred";
+            if (order_of_magnitude === 10)
+                words += keywords[order_of_magnitude * multiplier];
+            number -= order_of_magnitude*multiplier;
+            if ( number > 0 )
+                words += separator[order_of_magnitude];
+        }
     }
 
     words += keywords[number];
