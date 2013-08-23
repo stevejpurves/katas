@@ -1,7 +1,7 @@
 
 function numbers_to_words( number ) {
 	var words = ["","one","two","three", "four", "five","six","seven","eight",
-	"nine","ten","eleven","twelve","thirteen","fourteen","fifteen","sizteen",
+	"nine","ten","eleven","twelve","thirteen","fourteen","fifteen","sixteen",
 	"seventeen","eighteen","nineteen","twenty"];
 	words[30] = "thirty";
 	words[40] = "forty";
@@ -10,10 +10,15 @@ function numbers_to_words( number ) {
 	words[70] = "seventy";
 	words[80] = "eighty";
 	words[90] = "ninety";
-    words[100] = "one hundred";
+
 
 	if (words[number] !== undefined) 
 		return words[number];
+
+    if (number >= 100) {
+        var hundreds = Math.floor( number / 100 );
+        return numbers_to_words( hundreds ) + " hundred";
+    }
 
     var tens = 10 * Math.floor( number / 10 );
     return numbers_to_words(tens) + " " + numbers_to_words( number - tens );
@@ -54,6 +59,10 @@ describe("when converting numbers to words", function(){
 
         it("one hundred", function(){
             expect( numbers_to_words(100)).toBe("one hundred");
+        });
+
+        it("two hundred", function(){
+            expect( numbers_to_words(200)).toBe("two hundred");
         });
 	});
 });
