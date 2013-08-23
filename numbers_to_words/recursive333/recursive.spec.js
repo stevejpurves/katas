@@ -93,6 +93,8 @@ describe("when converting numbers to words", function(){
             expect( numbers_to_words(999)).toBe("nine hundred and ninety nine");
         });
 
-
+        it("one thousand and one", function(){
+            expect( numbers_to_words(1001)).toBe("one thousand and one");
+        });
     });
 });
