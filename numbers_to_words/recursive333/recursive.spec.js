@@ -1,29 +1,22 @@
 
 function numbers_to_words( number ) {
-	var keywords = ["","one","two","three", "four", "five","six","seven","eight",
+	var words = ["","one","two","three", "four", "five","six","seven","eight",
 	"nine","ten","eleven","twelve","thirteen","fourteen","fifteen","sizteen",
 	"seventeen","eighteen","nineteen","twenty"];
-	keywords[30] = "thirty";
-	keywords[40] = "forty";
-	keywords[50] = "fifty";
-	keywords[60] = "sixty";
-	keywords[70] = "seventy";
-	keywords[80] = "eighty";
-	keywords[90] = "ninety";
+	words[30] = "thirty";
+	words[40] = "forty";
+	words[50] = "fifty";
+	words[60] = "sixty";
+	words[70] = "seventy";
+	words[80] = "eighty";
+	words[90] = "ninety";
 
-	if (keywords[number] !== undefined) 
-		return keywords[number];
 
-    var words = "";
-	var most_significant_digit = 10 * Math.floor( number / 10 );
-    while (most_significant_digit > 0) {
-        words = numbers_to_words(most_significant_digit) + " ";
-        number -= most_significant_digit;
-        words += numbers_to_words(number);
-        most_significant_digit = 10 * Math.floor( number / 10 );
-    }
-
-	return words;
+	if (words[number] !== undefined) 
+		return words[number];
+	
+	var tens = 10 * Math.floor( number / 10 );
+	return numbers_to_words(tens) + " " + numbers_to_words(number-tens);	
 }
 
 describe("when converting numbers to words", function(){
