@@ -22,15 +22,18 @@ function numbers_to_words( number ) {
     var words = "";
     if (number >= 100) {
         words = keywords[hundreds] + " hundred";
-        var remainder = number - 100*hundreds;
-        if ( remainder > 0 ) {
-            words = words + " and " + numbers_to_words( remainder );
+        var number = number - 100*hundreds;
+        if ( number > 0 ) {
+            words = words + " and ";// + numbers_to_words( remainder );
         }
     }
-    else {
-        var remainder = number - 10*tens;
-        words = keywords[10 * tens] + " " + keywords[remainder];
+
+    if (number >= 10) {
+        var number = number - 10*tens;
+        words += keywords[10 * tens] + " ";
     }
+
+    words += keywords[number];
 
     return words;
 }
