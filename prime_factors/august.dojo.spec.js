@@ -16,7 +16,7 @@ function isDivisibleBy(n, divisor) {
 }
 
 function primes (n){
-    for (var i = 2;i < n/2 + 1;i++)
+    for (var i = 2;i < n/2+1;i++)
         if (isDivisibleBy(n, i))
             return [i].concat(primes(n/i));
     return [n];

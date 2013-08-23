@@ -13,9 +13,17 @@ function numbers_to_words( number ) {
 
 	if (keywords[number] !== undefined) 
 		return keywords[number];
-		
-	var tens = 10 * Math.floor( number / 10 );
-	return numbers_to_words(tens) + " " + numbers_to_words(number-tens);	
+
+    var words = "";
+	var most_significant_digit = 10 * Math.floor( number / 10 );
+    while (most_significant_digit > 0) {
+        words = numbers_to_words(most_significant_digit) + " ";
+        number -= most_significant_digit;
+        words += numbers_to_words(number);
+        most_significant_digit = 10 * Math.floor( number / 10 );
+    }
+
+	return words;
 }
 
 describe("when converting numbers to words", function(){
