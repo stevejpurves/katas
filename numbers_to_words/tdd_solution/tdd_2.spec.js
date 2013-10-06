@@ -3,8 +3,8 @@
 function numbers_to_words(number) {
     if (number === null || number < 1)
         return "";
-    if (number > 1)
-        return "one hundred";
+    if (number >= 100)
+        return numbers_to_words(number / 100) + " hundred";
     return "one";
 }
 
