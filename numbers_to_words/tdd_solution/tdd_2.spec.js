@@ -60,5 +60,9 @@ describe("converting numbers to words", function() {
         it("10,000,000", function(){
             expectNumberAsWords(10000000, "ten million");
         });
+
+        it("100,000,000", function(){
+            expectNumberAsWords(100000000, "one hundred million");
+        });
     });
 });
