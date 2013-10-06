@@ -3,7 +3,10 @@
 function numbers_to_words(number) {
     if (number === null || number < 1)
         return "";
-    var order = 100;
+    var order = 1000;
+    if (number >= order)
+        return numbers_to_words(number / order) + " thousand";
+    order = 100;
     if (number >= order)
         return numbers_to_words(number / order) + " hundred";
     return "one";
@@ -28,5 +31,9 @@ describe("converting numbers to words", function() {
 
     it("100", function(){
         expectNumberAsWords(100, "one hundred");
+    });
+
+    it("1000", function(){
+        expectNumberAsWords(1000, "one thousand");
     });
 });
