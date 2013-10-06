@@ -6,7 +6,6 @@ function numbers_to_words(number) {
 
     var keywords = ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven",
     "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"];
-    keywords[10] = "ten";
     keywords[100] = " hundred";
     keywords[1000] = " thousand";
     keywords[1000000] = " million";
