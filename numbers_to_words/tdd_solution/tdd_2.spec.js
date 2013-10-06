@@ -12,9 +12,17 @@ function numbers_to_words(number) {
 
     var orders = [1000000, 1000, 100, 10, 1];
 
-    for (var i = 0; orders[i] > 10; i++)
-        if (number >= orders[i])
-            return numbers_to_words(number / orders[i]) + keywords[orders[i]];
+    for (var i = 0; orders[i] > 10; i++) {
+        var words = "";
+        if (number >= orders[i]) {
+            words += numbers_to_words(Math.floor(number / orders[i]));
+            words += keywords[orders[i]];
+            if ( orders[i] === 100 && (number - 100) > 0)
+                words += " and " + numbers_to_words(number - 100);
+            return words;
+        }
+    }
+
     return keywords[number];
 }
 
@@ -71,6 +79,12 @@ describe("converting numbers to words", function() {
         });
         it("19", function(){
             expectNumberAsWords(19, "nineteen");
+        });
+    });
+
+    describe("numbers containing the word 'and'", function() {
+        it("101", function(){
+            expectNumberAsWords(101, "one hundred and one");
         });
     });
 });
