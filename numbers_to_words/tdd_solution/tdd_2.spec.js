@@ -11,13 +11,11 @@ function numbers_to_words(number) {
     keywords[1000] = " thousand";
     keywords[1000000] = " million";
 
-    var order = 1000000;
-    if (number >= order)
-        return numbers_to_words(number / order) + keywords[order];
+    var orders = [1000000, 1000, 100, 10, 1];
 
-    for (var order = 1000; order > 10; order /= 10)
-        if (number >= order)
-            return numbers_to_words(number / order) + keywords[order];
+    for (var i = 0; orders[i] > 10; i++)
+        if (number >= orders[i])
+            return numbers_to_words(number / orders[i]) + keywords[orders[i]];
     return keywords[number];
 }
 
