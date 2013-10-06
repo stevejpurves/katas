@@ -5,13 +5,15 @@ function numbers_to_words(number) {
         return "";
 
     var keywords = [];
+    keywords[1] = "one"
+    keywords[10] = "ten";
     keywords[100] = " hundred";
     keywords[1000] = " thousand";
 
     for (var order = 1000; order > 10; order /= 10)
         if (number >= order)
             return numbers_to_words(number / order) + keywords[order];
-    return "one";
+    return keywords[number];
 }
 
 
@@ -27,19 +29,10 @@ describe("converting numbers to words", function() {
         expectNumberAsWords(-1, "");
     });
 
-    it("1", function(){
+    it("for singular orders of magnitude", function(){
         expectNumberAsWords(1,"one");
-    });
-
-    it("100", function(){
         expectNumberAsWords(100, "one hundred");
-    });
-
-    it("1000", function(){
         expectNumberAsWords(1000, "one thousand");
-    });
-
-    it("10000", function(){
         expectNumberAsWords(10000, "ten thousand")
     });
 });
