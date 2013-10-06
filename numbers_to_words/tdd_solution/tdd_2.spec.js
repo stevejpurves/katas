@@ -4,8 +4,8 @@ function numbers_to_words(number) {
     if (number === null || number < 1)
         return "";
 
-    var keywords = [];
-    keywords[1] = "one";
+    var keywords = ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven",
+    "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"];
     keywords[10] = "ten";
     keywords[100] = " hundred";
     keywords[1000] = " thousand";
@@ -63,6 +63,15 @@ describe("converting numbers to words", function() {
 
         it("100,000,000", function(){
             expectNumberAsWords(100000000, "one hundred million");
+        });
+    });
+
+    describe("for numbers that contain a single word", function() {
+        it("2", function(){
+            expectNumberAsWords(2, "two");
+        });
+        it("19", function(){
+            expectNumberAsWords(19, "nineteen");
         });
     });
 });
