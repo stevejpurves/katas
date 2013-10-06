@@ -3,6 +3,8 @@
 function numbers_to_words(number) {
     if (number === null || number < 1)
         return "";
+    if (number > 1)
+        return "one hundred";
     return "one";
 }
 
@@ -21,5 +23,9 @@ describe("converting numbers to words", function() {
 
     it("1", function(){
         expectNumberAsWords(1,"one");
+    });
+
+    it("100", function(){
+        expectNumberAsWords(100, "one hundred");
     });
 });
