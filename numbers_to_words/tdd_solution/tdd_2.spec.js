@@ -5,7 +5,7 @@ function numbers_to_words(number) {
         return "";
 
     var keywords = [];
-    keywords[1] = "one"
+    keywords[1] = "one";
     keywords[10] = "ten";
     keywords[100] = " hundred";
     keywords[1000] = " thousand";
@@ -41,20 +41,24 @@ describe("converting numbers to words", function() {
             expectNumberAsWords(100, "one hundred");
         });
 
-        it("1000", function(){
+        it("1,000", function(){
             expectNumberAsWords(1000, "one thousand");
         });
 
-        it("10000", function(){
+        it("10,000", function(){
             expectNumberAsWords(10000, "ten thousand");
         });
 
-        it("100000", function(){
+        it("100,000", function(){
             expectNumberAsWords(100000, "one hundred thousand");
         });
 
-        it("1000000", function(){
+        it("1,000,000", function(){
             expectNumberAsWords(1000000, "one million");
+        });
+
+        it("10,000,000", function(){
+            expectNumberAsWords(10000000, "ten million");
         });
     });
 });
