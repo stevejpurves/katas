@@ -9,6 +9,10 @@ function numbers_to_words(number) {
     keywords[10] = "ten";
     keywords[100] = " hundred";
     keywords[1000] = " thousand";
+    keywords[1000000] = " million";
+
+    if (number >= 1000000)
+        return numbers_to_words(number / 1000000) + keywords[1000000];
 
     for (var order = 1000; order > 10; order /= 10)
         if (number >= order)
@@ -29,10 +33,29 @@ describe("converting numbers to words", function() {
         expectNumberAsWords(-1, "");
     });
 
-    it("for singular orders of magnitude", function(){
-        expectNumberAsWords(1,"one");
-        expectNumberAsWords(100, "one hundred");
-        expectNumberAsWords(1000, "one thousand");
-        expectNumberAsWords(10000, "ten thousand")
+    describe("for singular orders of magnitude", function(){
+        it("1", function(){
+            expectNumberAsWords(1,"one");
+        });
+
+        it("100", function(){
+            expectNumberAsWords(100, "one hundred");
+        });
+
+        it("1000", function(){
+            expectNumberAsWords(1000, "one thousand");
+        });
+
+        it("10000", function(){
+            expectNumberAsWords(10000, "ten thousand");
+        });
+
+        it("100000", function(){
+            expectNumberAsWords(100000, "one hundred thousand");
+        });
+
+        it("1000000", function(){
+            expectNumberAsWords(1000000, "one million");
+        });
     });
 });
