@@ -1,17 +1,25 @@
 
 
 function numbers_to_words(number) {
-    return "";
+    if (number === null || number < 1)
+        return "";
+    return "one";
 }
-
-
-
 
 
 describe("converting numbers to words", function() {
 
-    it("nothing", function() {
-        expect(numbers_to_words(null)).toEqual("");
+    function expectNumberAsWords(number, words) {
+        expect(numbers_to_words(number)).toEqual(words);
+    }
+
+    it("given bad input, returns empty", function() {
+        expectNumberAsWords(null, "");
+        expectNumberAsWords(0, "");
+        expectNumberAsWords(-1, "");
     });
 
+    it("1", function(){
+        expectNumberAsWords(1,"one");
+    });
 });
