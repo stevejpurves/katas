@@ -10,6 +10,7 @@ function numbers_to_words( number ) {
     keywords[70] = "seventy";
     keywords[80] = "eighty";
     keywords[90] = "ninety";
+    keywords[100] = "hundred";
     keywords[1000] = "thousand";
 
     var separator = [""];
@@ -21,19 +22,24 @@ function numbers_to_words( number ) {
     for (var order_of_magnitude = 1000; order_of_magnitude > 1; order_of_magnitude /= 10) {
         var multiplier = Math.floor( number / order_of_magnitude );
         while (number >= order_of_magnitude) {
-            if (order_of_magnitude === 1000)
+            if (order_of_magnitude === 1000) {
                 words += keywords[multiplier] + " " + keywords[order_of_magnitude];
-            if (order_of_magnitude === 100)
-                words += keywords[multiplier] + " hundred";
+                number -= order_of_magnitude*multiplier;
+            }
+            if (order_of_magnitude === 100) {
+                words += keywords[multiplier] + " " + keywords[order_of_magnitude];
+                number -= order_of_magnitude*multiplier;
+            }
             if (order_of_magnitude === 10) {
                 if (number < 20) {
                     words += keywords[number];
                     multiplier = number / 10;
                 }
-                else
+                else {
                     words += keywords[order_of_magnitude * multiplier];
+                }
+                number -= order_of_magnitude*multiplier;
             }
-            number -= order_of_magnitude*multiplier;
             if ( number > 0 )
                 words += separator[order_of_magnitude];
         }
