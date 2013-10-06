@@ -8,12 +8,9 @@ function numbers_to_words(number) {
     keywords[100] = " hundred";
     keywords[1000] = " thousand";
 
-    var order = 1000;
-    if (number >= order)
-        return numbers_to_words(number / order) + keywords[order];
-    order = 100;
-    if (number >= order)
-        return numbers_to_words(number / order) + keywords[order];
+    for (var order = 1000; order > 10; order /= 10)
+        if (number >= order)
+            return numbers_to_words(number / order) + keywords[order];
     return "one";
 }
 
