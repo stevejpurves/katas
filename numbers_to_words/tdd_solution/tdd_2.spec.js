@@ -38,4 +38,8 @@ describe("converting numbers to words", function() {
     it("1000", function(){
         expectNumberAsWords(1000, "one thousand");
     });
+
+    it("10000", function(){
+        expectNumberAsWords(10000, "ten thousand")
+    });
 });
