@@ -11,8 +11,9 @@ function numbers_to_words(number) {
     keywords[1000] = " thousand";
     keywords[1000000] = " million";
 
-    if (number >= 1000000)
-        return numbers_to_words(number / 1000000) + keywords[1000000];
+    var order = 1000000;
+    if (number >= order)
+        return numbers_to_words(number / order) + keywords[order];
 
     for (var order = 1000; order > 10; order /= 10)
         if (number >= order)
