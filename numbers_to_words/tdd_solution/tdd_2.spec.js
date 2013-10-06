@@ -3,8 +3,9 @@
 function numbers_to_words(number) {
     if (number === null || number < 1)
         return "";
-    if (number >= 100)
-        return numbers_to_words(number / 100) + " hundred";
+    var order = 100;
+    if (number >= order)
+        return numbers_to_words(number / order) + " hundred";
     return "one";
 }
 
