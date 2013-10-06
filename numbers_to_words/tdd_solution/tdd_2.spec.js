@@ -3,12 +3,17 @@
 function numbers_to_words(number) {
     if (number === null || number < 1)
         return "";
+
+    var keywords = [];
+    keywords[100] = " hundred";
+    keywords[1000] = " thousand";
+
     var order = 1000;
     if (number >= order)
-        return numbers_to_words(number / order) + " thousand";
+        return numbers_to_words(number / order) + keywords[order];
     order = 100;
     if (number >= order)
-        return numbers_to_words(number / order) + " hundred";
+        return numbers_to_words(number / order) + keywords[order];
     return "one";
 }
 
