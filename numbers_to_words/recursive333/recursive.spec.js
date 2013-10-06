@@ -1,35 +1,37 @@
+var keywords = ["","one","two","three", "four", "five","six","seven","eight",
+    "nine","ten","eleven","twelve","thirteen","fourteen","fifteen","sixteen",
+    "seventeen","eighteen","nineteen","twenty"];
+keywords[30] = "thirty";
+keywords[40] = "forty";
+keywords[50] = "fifty";
+keywords[60] = "sixty";
+keywords[70] = "seventy";
+keywords[80] = "eighty";
+keywords[90] = "ninety";
+keywords[100] = "hundred";
+keywords[1000] = "thousand";
+
+var separator = [""];
+separator[10] = " ";
+separator[100] = " and ";
+
+
+function convertOrder(number_arg, order_of_magnitude) {
+    var multiplier = Math.floor( number_arg / order_of_magnitude );
+    number_arg -= order_of_magnitude * multiplier;
+    return keywords[multiplier] + " " + keywords[order_of_magnitude];
+}
 
 function numbers_to_words( number ) {
-	var keywords = ["","one","two","three", "four", "five","six","seven","eight",
-	"nine","ten","eleven","twelve","thirteen","fourteen","fifteen","sixteen",
-	"seventeen","eighteen","nineteen","twenty"];
-    keywords[30] = "thirty";
-    keywords[40] = "forty";
-    keywords[50] = "fifty";
-    keywords[60] = "sixty";
-    keywords[70] = "seventy";
-    keywords[80] = "eighty";
-    keywords[90] = "ninety";
-    keywords[100] = "hundred";
-    keywords[1000] = "thousand";
-
-    var separator = [""];
-    separator[10] = " ";
-    separator[100] = " and ";
-
     var words = "";
 
     for (var order_of_magnitude = 1000; order_of_magnitude > 1; order_of_magnitude /= 10) {
         var multiplier = Math.floor( number / order_of_magnitude );
         while (number >= order_of_magnitude) {
-            if (order_of_magnitude === 1000) {
-                words += keywords[multiplier] + " " + keywords[order_of_magnitude];
-                number -= order_of_magnitude*multiplier;
-            }
-            if (order_of_magnitude === 100) {
-                words += keywords[multiplier] + " " + keywords[order_of_magnitude];
-                number -= order_of_magnitude*multiplier;
-            }
+            if (order_of_magnitude === 1000)
+               words += convertOrder(number, 1000);
+            if (order_of_magnitude === 100)
+                words += convertOrder(number, 100);
             if (order_of_magnitude === 10) {
                 if (number < 20) {
                     words += keywords[number];
