@@ -18,14 +18,13 @@ function writeFirstPart(quotient, order, keywords) {
 
 function writeWordsFor(number, order, keywords) {
     var quotient = Math.floor(number / order);
-    var words = writeFirstPart(quotient, order, keywords);
-    words += addSeparators(number, quotient, order);
-    words += convertRemainder(number, quotient, order);
-    return words;
+    return writeFirstPart(quotient, order, keywords)
+        + addSeparators(number, quotient, order)
+        + convertRemainder(number, quotient, order);
 }
+
 function numbers_to_words(number) {
-    if (number === null || number < 1)
-        return "";
+    if (number === null || number < 1) return "";
 
     var keywords = ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven",
     "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"];
@@ -36,6 +35,7 @@ function numbers_to_words(number) {
     var orders = [1000000, 1000, 100, 10, 1];
 
     if (number < 20) return keywords[number];
+
     for (var i = 0; orders[i] > 1; i++)
         if (number >= orders[i])
             return writeWordsFor(number, orders[i], keywords);
@@ -43,7 +43,6 @@ function numbers_to_words(number) {
 
 
 describe("converting numbers to words", function() {
-
     function expectNumberAsWords(number, words) {
         expect(numbers_to_words(number)).toEqual(words);
     }
