@@ -28,6 +28,13 @@ function numbers_to_words(number) {
 
     var keywords = ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven",
     "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"];
+    keywords[20] = "twenty";
+    keywords[30] = "thirty";
+    keywords[40] = "forty";
+    keywords[50] = "fifty";
+    keywords[60] = "sixty";
+    keywords[70] = "seventy";
+    keywords[80] = "eighty";
     keywords[90] = "ninety";
     keywords[100] = " hundred";
     keywords[1000] = " thousand";
@@ -42,81 +49,107 @@ function numbers_to_words(number) {
 }
 
 
-describe("converting numbers to words", function() {
+describe("converting numbers to words - ", function() {
     function expectNumberAsWords(number, words) {
         expect(numbers_to_words(number)).toEqual(words);
     }
 
-    it("given bad input, returns empty", function() {
-        expectNumberAsWords(null, "");
-        expectNumberAsWords(0, "");
-        expectNumberAsWords(-1, "");
+    describe("tests created during tdd process, in order", function() {
+        it("given bad input, returns empty", function() {
+            expectNumberAsWords(null, "");
+            expectNumberAsWords(0, "");
+            expectNumberAsWords(-1, "");
+        });
+
+        it("1", function(){
+            expectNumberAsWords(1,"one");
+        });
+
+        it("100", function(){
+            expectNumberAsWords(100, "one hundred");
+        });
+
+        it("1,000", function(){
+            expectNumberAsWords(1000, "one thousand");
+        });
+
+        it("10,000", function(){
+            expectNumberAsWords(10000, "ten thousand");
+        });
+
+        it("100,000", function(){
+            expectNumberAsWords(100000, "one hundred thousand");
+        });
+
+        it("1,000,000", function(){
+            expectNumberAsWords(1000000, "one million");
+        });
+
+        it("10,000,000", function(){
+            expectNumberAsWords(10000000, "ten million");
+        });
+
+        it("100,000,000", function(){
+            expectNumberAsWords(100000000, "one hundred million");
+        });
+
+        it("2", function(){
+            expectNumberAsWords(2, "two");
+        });
+        it("19", function(){
+            expectNumberAsWords(19, "nineteen");
+        });
+
+        it("101", function(){
+            expectNumberAsWords(101, "one hundred and one");
+        });
+
+        it("201", function(){
+            expectNumberAsWords(201, "two hundred and one");
+        });
+
+        it("1001", function(){
+            expectNumberAsWords(1001, "one thousand and one");
+        });
+
+        it("99", function(){
+            expectNumberAsWords(99, "ninety nine");
+        });
+
+        it("9999", function(){
+            expectNumberAsWords(9999, "nine thousand nine hundred and ninety nine");
+        });
+
+        it("999999", function(){
+            expectNumberAsWords(999999, "nine hundred and ninety nine thousand nine hundred and ninety nine");
+        });
+
+        it("999999999", function(){
+            expectNumberAsWords(999999999, "nine hundred and ninety nine million nine hundred and ninety nine thousand nine hundred and ninety nine");
+        });
+
+        it("other numbers that need new keywords, 20 - 90", function(){
+            expectNumberAsWords(20,"twenty");
+            expectNumberAsWords(30,"thirty");
+            expectNumberAsWords(40,"forty");
+            expectNumberAsWords(50,"fifty");
+            expectNumberAsWords(60,"sixty");
+            expectNumberAsWords(70,"seventy");
+            expectNumberAsWords(80,"eighty");
+            expectNumberAsWords(90,"ninety");
+        });
     });
 
-    it("1", function(){
-        expectNumberAsWords(1,"one");
+    describe("additional acceptance tests from AOS coding challenge, just the interesting ones", function(){
+
+
+        it("2", function(){
+            expectNumberAsWords(2,"two");
+        });
+
+        it("3", function(){
+            expectNumberAsWords(3,"two");
+        });
     });
 
-    it("100", function(){
-        expectNumberAsWords(100, "one hundred");
-    });
-
-    it("1,000", function(){
-        expectNumberAsWords(1000, "one thousand");
-    });
-
-    it("10,000", function(){
-        expectNumberAsWords(10000, "ten thousand");
-    });
-
-    it("100,000", function(){
-        expectNumberAsWords(100000, "one hundred thousand");
-    });
-
-    it("1,000,000", function(){
-        expectNumberAsWords(1000000, "one million");
-    });
-
-    it("10,000,000", function(){
-        expectNumberAsWords(10000000, "ten million");
-    });
-
-    it("100,000,000", function(){
-        expectNumberAsWords(100000000, "one hundred million");
-    });
-
-    it("2", function(){
-        expectNumberAsWords(2, "two");
-    });
-    it("19", function(){
-        expectNumberAsWords(19, "nineteen");
-    });
-
-    it("101", function(){
-        expectNumberAsWords(101, "one hundred and one");
-    });
-
-    it("201", function(){
-        expectNumberAsWords(201, "two hundred and one");
-    });
-
-    it("1001", function(){
-        expectNumberAsWords(1001, "one thousand and one");
-    });
-
-    it("99", function(){
-        expectNumberAsWords(99, "ninety nine");
-    });
-
-    it("9999", function(){
-        expectNumberAsWords(9999, "nine thousand nine hundred and ninety nine");
-    });
-
-    it("999999", function(){
-        expectNumberAsWords(999999, "nine hundred and ninety nine thousand nine hundred and ninety nine");
-    });
-
-    it("999999999", function(){
-        expectNumberAsWords(999999999, "nine hundred and ninety nine million nine hundred and ninety nine thousand nine hundred and ninety nine");
-    });
 });
