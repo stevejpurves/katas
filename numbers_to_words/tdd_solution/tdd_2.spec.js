@@ -15,10 +15,11 @@ function numbers_to_words(number) {
     for (var i = 0; orders[i] > 10; i++) {
         var words = "";
         if (number >= orders[i]) {
-            words += numbers_to_words(Math.floor(number / orders[i]));
+            var number_of_order = Math.floor(number / orders[i]);
+            words += numbers_to_words(number_of_order);
             words += keywords[orders[i]];
-            var remainder = (number - Math.floor(number / orders[i])*100);
-            if ( orders[i] === 100 && remainder > 0)
+            var remainder = (number - number_of_order*orders[i]);
+            if ( remainder > 0)
                 words += " and " + numbers_to_words(remainder);
             return words;
         }
