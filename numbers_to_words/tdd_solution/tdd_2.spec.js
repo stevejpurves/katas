@@ -12,6 +12,9 @@ function numbers_to_words(number) {
 
     var orders = [1000000, 1000, 100, 10, 1];
 
+    if (number < 20 )
+        return keywords[number];
+
     for (var i = 0; orders[i] > 10; i++) {
         var words = "";
         if (number >= orders[i]) {
@@ -24,8 +27,6 @@ function numbers_to_words(number) {
             return words;
         }
     }
-
-    return keywords[number];
 }
 
 
