@@ -1,4 +1,9 @@
-
+function addSeparators(number, quotient, order) {
+    var remainder = (number - quotient * order);
+    if (remainder > 0)
+        return ((order === 1000 && remainder < 100) || (order === 100)) ? " and " : " ";
+    return "";
+}
 function numbers_to_words(number) {
     if (number === null || number < 1)
         return "";
@@ -16,17 +21,13 @@ function numbers_to_words(number) {
     if (number < 20) return keywords[number];
 
     for (var i = 0; orders[i] > 10; i++) {
-        var number_of_order = Math.floor(number / orders[i]);
-        if (number_of_order >= 1) {
-            words += numbers_to_words(number_of_order);
-            words += keywords[orders[i]];
-            var remainder = (number - number_of_order*orders[i]);
-            if ( remainder > 0 ) {
-                words += " ";
-                if ( (orders[i]===1000 && remainder < 100) || (orders[i] === 100) )
-                    words += "and ";
-
-            }
+        var order = orders[i];
+        var quotient = Math.floor(number / order);
+        if (quotient >= 1) {
+            words += numbers_to_words(quotient);
+            words += keywords[order];
+            words += addSeparators(number, quotient, order);
+            var remainder = (number - quotient * order);
             words += numbers_to_words(remainder);
             return words;
         }
