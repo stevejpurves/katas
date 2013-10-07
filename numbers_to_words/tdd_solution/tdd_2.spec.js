@@ -32,13 +32,9 @@ function numbers_to_words(number) {
             var remainder = (number - number_of_order*orders[i]);
             if ( remainder > 0 ) {
                 words += separators[orders[i]];
-                if (remainder > 10) {
-                    console.log("a", number_of_order, remainder);
-                    words += keywords[number_of_order*10] + " " + keywords[remainder];
-                }
-                else
-                    console.log(number_of_order, remainder);
-                    words += keywords[remainder];
+                if (remainder > 10)
+                    words += keywords[number_of_order*10];
+                words += keywords[remainder];
             }
             return words;
         }
