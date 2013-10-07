@@ -19,8 +19,7 @@ function numbers_to_words(number) {
         var words = "";
         if (number >= orders[i]) {
             var number_of_order = Math.floor(number / orders[i]);
-            words += numbers_to_words(number_of_order);
-            words += keywords[orders[i]];
+            words += numbers_to_words(number_of_order) + keywords[orders[i]];
             var remainder = (number - number_of_order*orders[i]);
             if ( remainder > 0)
                 words += " and " + numbers_to_words(remainder);
