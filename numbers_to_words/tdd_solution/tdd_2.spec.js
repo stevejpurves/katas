@@ -1,5 +1,4 @@
 
-
 function numbers_to_words(number) {
     if (number === null || number < 1)
         return "";
@@ -10,36 +9,33 @@ function numbers_to_words(number) {
     keywords[100] = " hundred";
     keywords[1000] = " thousand";
     keywords[1000000] = " million";
-
     var orders = [1000000, 1000, 100, 10, 1];
-    var separators = [];
-    separators[10] = " ";
-    separators[100] = " and ";
-    separators[1000] = " and ";
+
+    var words = "";
 
     if (number < 20) return keywords[number];
 
-    for (var i = 0; orders[i] >= 10; i++) {
+    for (var i = 0; orders[i] > 10; i++) {
         var number_of_order = Math.floor(number / orders[i]);
         if (number_of_order >= 1) {
-            var words = "";
-            if (orders[i] === 10)
-                words += keywords[number_of_order*orders[i]];
-            else {
-                words += numbers_to_words(number_of_order);
-                words += keywords[orders[i]];
-            }
+            words += numbers_to_words(number_of_order);
+            words += keywords[orders[i]];
             var remainder = (number - number_of_order*orders[i]);
             if ( remainder > 0 ) {
-                words += separators[orders[i]];
-                if (remainder > 10)
-                    words += keywords[number_of_order*10];
-                words += keywords[remainder];
+                words += " ";
+                if ( (orders[i]===1000 && remainder < 100) || (orders[i] === 100) )
+                    words += "and ";
+
             }
+            words += numbers_to_words(remainder);
             return words;
         }
     }
 
+    var magnitude = 10 * Math.floor(number / 10);
+    words += keywords[magnitude];
+    words += " " + keywords[number - magnitude];
+    return words;
 }
 
 
@@ -108,5 +104,13 @@ describe("converting numbers to words", function() {
 
     it("99", function(){
         expectNumberAsWords(99, "ninety nine");
+    });
+
+    it("9999", function(){
+        expectNumberAsWords(9999, "nine thousand nine hundred and ninety nine");
+    });
+
+    it("999999", function(){
+        expectNumberAsWords(999999, "nine hundred and ninety nine thousand nine hundred and ninety nine");
     });
 });
