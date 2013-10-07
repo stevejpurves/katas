@@ -17,8 +17,8 @@ function numbers_to_words(number) {
 
     for (var i = 0; orders[i] > 10; i++) {
         var words = "";
-        if (number >= orders[i]) {
-            var number_of_order = Math.floor(number / orders[i]);
+        var number_of_order = Math.floor(number / orders[i]);
+        if (number_of_order >= 1) {
             words += numbers_to_words(number_of_order) + keywords[orders[i]];
             var remainder = (number - number_of_order*orders[i]);
             if ( remainder > 0)
