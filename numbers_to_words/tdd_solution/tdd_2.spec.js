@@ -1,7 +1,9 @@
 function addSeparators(number, quotient, order) {
     var remainder = (number - quotient * order);
     if (remainder > 0)
-        return ((order === 1000 && remainder < 100) || (order === 100)) ? " and " : " ";
+        return ((order === 100)
+            || (order === 1000 && remainder < 100)
+            || (order === 1000000 && remainder < 100)) ? " and " : " ";
     return "";
 }
 
@@ -124,10 +126,6 @@ describe("converting numbers to words - ", function() {
             expectNumberAsWords(999999, "nine hundred and ninety nine thousand nine hundred and ninety nine");
         });
 
-        it("999999999", function(){
-            expectNumberAsWords(999999999, "nine hundred and ninety nine million nine hundred and ninety nine thousand nine hundred and ninety nine");
-        });
-
         it("other numbers that need new keywords, 20 - 90", function(){
             expectNumberAsWords(20,"twenty");
             expectNumberAsWords(30,"thirty");
@@ -138,18 +136,37 @@ describe("converting numbers to words - ", function() {
             expectNumberAsWords(80,"eighty");
             expectNumberAsWords(90,"ninety");
         });
+
+        it("1000001", function(){
+            expectNumberAsWords(1000001, "one million and one");
+        });
     });
 
     describe("additional acceptance tests from AOS coding challenge, just the interesting ones", function(){
-
-
-        it("2", function(){
-            expectNumberAsWords(2,"two");
+        it("98", function(){
+            expectNumberAsWords(98,"ninety eight");
         });
 
-        it("3", function(){
-            expectNumberAsWords(3,"two");
+        it("199", function(){
+            expectNumberAsWords(199,"one hundred and ninety nine");
         });
+
+        it("1099", function(){
+            expectNumberAsWords(1099,"one thousand and ninety nine");
+        });
+
+        it("100001", function(){
+            expectNumberAsWords(100001, "one hundred thousand and one");
+        });
+
+//        it("101000001", function(){
+//            expectNumberAsWords(101000001, "one hundred and one million and one");
+//        });
+
+        it("999999999", function(){
+            expectNumberAsWords(999999999, "nine hundred and ninety nine million nine hundred and ninety nine thousand nine hundred and ninety nine");
+        });
+
     });
 
 });
