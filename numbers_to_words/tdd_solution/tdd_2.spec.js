@@ -33,9 +33,12 @@ function numbers_to_words(number) {
         }
     }
 
-    var magnitude = 10 * Math.floor(number / 10);
-    words += keywords[magnitude];
-    words += " " + keywords[number - magnitude];
+    var order = 10;
+    var quotient = Math.floor(number / order);
+    words += keywords[order * quotient];
+    words += addSeparators(number, quotient, order);
+    var remainder = (number - quotient * order);
+    words += keywords[number - order * quotient];
     return words;
 }
 
@@ -113,5 +116,9 @@ describe("converting numbers to words", function() {
 
     it("999999", function(){
         expectNumberAsWords(999999, "nine hundred and ninety nine thousand nine hundred and ninety nine");
+    });
+
+    it("999999999", function(){
+        expectNumberAsWords(999999999, "nine hundred and ninety nine million nine hundred and ninety nine thousand nine hundred and ninety nine");
     });
 });
