@@ -159,9 +159,17 @@ describe("converting numbers to words - ", function() {
             expectNumberAsWords(100001, "one hundred thousand and one");
         });
 
-//        it("101000001", function(){
-//            expectNumberAsWords(101000001, "one hundred and one million and one");
-//        });
+        it("1001001", function(){
+            expectNumberAsWords(1001001, "one million one thousand and one")
+        });
+
+        it("1010001", function(){
+            expectNumberAsWords(1010001, "one million ten thousand and one")
+        });
+
+        it("101000001", function(){
+            expectNumberAsWords(101000001, "one hundred and one million and one");
+        });
 
         it("999999999", function(){
             expectNumberAsWords(999999999, "nine hundred and ninety nine million nine hundred and ninety nine thousand nine hundred and ninety nine");
