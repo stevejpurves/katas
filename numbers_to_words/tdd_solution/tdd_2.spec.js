@@ -4,6 +4,12 @@ function addSeparators(number, quotient, order) {
         return ((order === 1000 && remainder < 100) || (order === 100)) ? " and " : " ";
     return "";
 }
+
+function convertRemainder(number, quotient, order) {
+    var remainder = (number - quotient * order);
+    return numbers_to_words(remainder);
+}
+
 function numbers_to_words(number) {
     if (number === null || number < 1)
         return "";
@@ -20,26 +26,21 @@ function numbers_to_words(number) {
 
     if (number < 20) return keywords[number];
 
-    for (var i = 0; orders[i] > 10; i++) {
+    for (var i = 0; orders[i] >= 10; i++) {
         var order = orders[i];
         var quotient = Math.floor(number / order);
-        if (quotient >= 1) {
-            words += numbers_to_words(quotient);
-            words += keywords[order];
+        if (number >= order) {
+            if (order === 10)
+                words += keywords[order * quotient];
+            else {
+                words += numbers_to_words(quotient);
+                words += keywords[order];
+            }
             words += addSeparators(number, quotient, order);
-            var remainder = (number - quotient * order);
-            words += numbers_to_words(remainder);
+            words += convertRemainder(number, quotient, order);
             return words;
         }
     }
-
-    var order = 10;
-    var quotient = Math.floor(number / order);
-    words += keywords[order * quotient];
-    words += addSeparators(number, quotient, order);
-    var remainder = (number - quotient * order);
-    words += keywords[number - order * quotient];
-    return words;
 }
 
 
