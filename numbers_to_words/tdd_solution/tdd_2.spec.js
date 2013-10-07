@@ -17,8 +17,9 @@ function numbers_to_words(number) {
         if (number >= orders[i]) {
             words += numbers_to_words(Math.floor(number / orders[i]));
             words += keywords[orders[i]];
-            if ( orders[i] === 100 && (number - 100) > 0)
-                words += " and " + numbers_to_words(number - 100);
+            var remainder = (number - Math.floor(number / orders[i])*100);
+            if ( orders[i] === 100 && remainder > 0)
+                words += " and " + numbers_to_words(remainder);
             return words;
         }
     }
@@ -85,6 +86,10 @@ describe("converting numbers to words", function() {
     describe("numbers containing the word 'and'", function() {
         it("101", function(){
             expectNumberAsWords(101, "one hundred and one");
+        });
+
+        it("201", function(){
+            expectNumberAsWords(201, "two hundred and one");
         });
     });
 });
