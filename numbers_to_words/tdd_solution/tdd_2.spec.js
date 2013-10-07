@@ -10,6 +10,19 @@ function convertRemainder(number, quotient, order) {
     return numbers_to_words(remainder);
 }
 
+function writeFirstPart(quotient, order, keywords) {
+    if (order === 10)
+        return keywords[order * quotient];
+    return numbers_to_words(quotient) + keywords[order];
+}
+
+function writeWordsFor(number, order, keywords) {
+    var quotient = Math.floor(number / order);
+    var words = writeFirstPart(quotient, order, keywords);
+    words += addSeparators(number, quotient, order);
+    words += convertRemainder(number, quotient, order);
+    return words;
+}
 function numbers_to_words(number) {
     if (number === null || number < 1)
         return "";
@@ -22,25 +35,10 @@ function numbers_to_words(number) {
     keywords[1000000] = " million";
     var orders = [1000000, 1000, 100, 10, 1];
 
-    var words = "";
-
     if (number < 20) return keywords[number];
-
-    for (var i = 0; orders[i] >= 10; i++) {
-        var order = orders[i];
-        var quotient = Math.floor(number / order);
-        if (number >= order) {
-            if (order === 10)
-                words += keywords[order * quotient];
-            else {
-                words += numbers_to_words(quotient);
-                words += keywords[order];
-            }
-            words += addSeparators(number, quotient, order);
-            words += convertRemainder(number, quotient, order);
-            return words;
-        }
-    }
+    for (var i = 0; orders[i] > 1; i++)
+        if (number >= orders[i])
+            return writeWordsFor(number, orders[i], keywords);
 }
 
 
