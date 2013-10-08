@@ -1,31 +1,42 @@
-function addSeparators(number, quotient, order) {
+function isInTheTens(order) {
+    return order === 10;
+}
+function isInTheHundreds(order) {
+    return (order === 100);
+}
+function isInTheThousands(order) {
+    return order === 1000;
+}
+function isInTheMillions(order) {
+    return order === 1000000;
+}
+function addAndOrASpace(number, quotient, order) {
     var remainder = (number - quotient * order);
-    if (remainder > 0)
-        return ((order === 100)
-            || (order === 1000 && remainder < 100)
-            || (order === 1000000 && remainder < 100)) ? " and " : " ";
-    return "";
+    if (remainder === 0) return "";
+    return (isInTheHundreds(order)
+        || (isInTheThousands(order) && remainder < 100)
+        || (isInTheMillions(order) && remainder < 100)) ? " and " : " ";
 }
 
-function convertRemainder(number, quotient, order) {
+function writeLowerOrderPart(number, quotient, order) {
     var remainder = (number - quotient * order);
-    return numbers_to_words(remainder);
+    return convertNumbersToWords(remainder);
 }
 
-function writeFirstPart(quotient, order, keywords) {
-    if (order === 10)
+function writeHigherOrderPart(quotient, order, keywords) {
+    if (isInTheTens(order))
         return keywords[order * quotient];
-    return numbers_to_words(quotient) + keywords[order];
+    return convertNumbersToWords(quotient) + keywords[order];
 }
 
 function writeWordsFor(number, order, keywords) {
     var quotient = Math.floor(number / order);
-    return writeFirstPart(quotient, order, keywords)
-        + addSeparators(number, quotient, order)
-        + convertRemainder(number, quotient, order);
+    return writeHigherOrderPart(quotient, order, keywords)
+        + addAndOrASpace(number, quotient, order)
+        + writeLowerOrderPart(number, quotient, order);
 }
 
-function numbers_to_words(number) {
+function convertNumbersToWords(number) {
     if (number === null || number < 1) return "";
 
     var keywords = ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven",
@@ -53,7 +64,7 @@ function numbers_to_words(number) {
 
 describe("converting numbers to words - ", function() {
     function expectNumberAsWords(number, words) {
-        expect(numbers_to_words(number)).toEqual(words);
+        expect(convertNumbersToWords(number)).toEqual(words);
     }
 
     describe("tests created during tdd process, in order", function() {
