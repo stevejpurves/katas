@@ -1,0 +1,16 @@
+{
+  "name": "PrimeFactors",
+  "version": "0.0.0",
+  "description": "Prime Factors Dojo Solution with @carlosble @kabomi5",
+  "main": "spec.js",
+  "dependencies": {
+    "chai": "~1.7.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "",
+  "author": "",
+  "license": "BSD"
+}
