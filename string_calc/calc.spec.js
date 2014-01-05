@@ -1,8 +1,8 @@
 function add(string) {	
 	if (string === undefined || string === "" ) 
 		return 0;
-	var bits = getSeparatorAndString(string)
-	return sumTheNumberPart( bits.string , bits.separator );
+	var tokens = getSeparatorAndString(string)
+	return sumTheNumberPart( tokens );
 }
 
 function getSeparatorAndString( string ) {
@@ -13,10 +13,10 @@ function getSeparatorAndString( string ) {
 		return { string: string, separator: '[,\n]' };
 }
 
-function sumTheNumberPart(string, separator) {
+function sumTheNumberPart( tokens ) {
 	var sum = 0;
-	var reg = new RegExp(separator);
-	string.split(reg)
+	var reg = new RegExp( tokens.separator );
+	tokens.string.split(reg)
 		.forEach(function(value) { 
 			sum += parseInt(value);
 			});	
