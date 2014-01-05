@@ -1,19 +1,23 @@
 function add(string) {	
 	if (string === undefined || string === "" ) 
 		return 0;
+	var bits = getSeparatorAndString(string)
+	return sumTheNumberPart( bits.string , bits.separator );
+}
 
+function getSeparatorAndString( string ) {
 	var matches = string.match(/\/\/(.*)\n(.*)/);
 	if (matches)
-		return sumTheNumberPart( matches[2], matches[1] );
+		return { string: matches[2], separator: matches[1] };
 	else
-		return sumTheNumberPart( string , '[,\n]' );
+		return { string: string, separator: '[,\n]' };
 }
 
 function sumTheNumberPart(string, separator) {
 	var sum = 0;
 	var reg = new RegExp(separator);
 	string.split(reg)
-		.forEach(function(value) {
+		.forEach(function(value) { 
 			sum += parseInt(value);
 			});	
 	return sum;
