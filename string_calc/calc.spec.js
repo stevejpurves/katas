@@ -16,7 +16,7 @@ function getSeparatorAndString( string ) {
 function sumTheNumberPart( tokens ) {
 	var sum = 0;
 	var regexp = new RegExp( tokens.separator );
-	var numbers = tokens.string.split( regexp );	
+	var numbers = tokens.string.split( regexp );
 	return _.reduce(numbers, function(memo, value) {return memo + parseInt(value);}, 0);
 }
 
@@ -51,5 +51,9 @@ describe("string calculator", function() {
 	it("Introducing any separator character and maybe new line characters", function()
 	{
 		expectAddedNumbers("//;\n1;2", 3);
+	});
+	
+	it("throws and exception for negative numbers", function() {
+		expect(add("1,-1")).toThrow("negatives not allowed:-1");
 	});
 });
