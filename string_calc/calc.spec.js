@@ -1,13 +1,12 @@
-function add(string) {
-	var sum  = 0;
-	if (string !== undefined && string !== "" ) {
-		var matches = string.match(/\/\/(.*)\n(.*)/);
-		if (matches)
-			sum = sumTheNumberPart( matches[2], matches[1] );
-		else
-			sum = sumTheNumberPart( string , '[,\n]' );
-	}				
-	return sum;
+function add(string) {	
+	if (string === undefined || string === "" ) 
+		return 0;
+
+	var matches = string.match(/\/\/(.*)\n(.*)/);
+	if (matches)
+		return sumTheNumberPart( matches[2], matches[1] );
+	else
+		return sumTheNumberPart( string , '[,\n]' );
 }
 
 function sumTheNumberPart(string, separator) {
