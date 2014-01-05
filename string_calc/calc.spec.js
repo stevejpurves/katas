@@ -1,26 +1,23 @@
+var _ = require('underscore');
+
 function add(string) {	
 	if (string === undefined || string === "" ) 
 		return 0;
-	var tokens = getSeparatorAndString(string)
-	return sumTheNumberPart( tokens );
+	return sumTheNumberPart( getSeparatorAndString(string) );
 }
 
 function getSeparatorAndString( string ) {
 	var matches = string.match(/\/\/(.*)\n(.*)/);
 	if (matches)
 		return { string: matches[2], separator: matches[1] };
-	else
-		return { string: string, separator: '[,\n]' };
+	return { string: string, separator: '[,\n]' };
 }
 
 function sumTheNumberPart( tokens ) {
 	var sum = 0;
-	var reg = new RegExp( tokens.separator );
-	tokens.string.split(reg)
-		.forEach(function(value) { 
-			sum += parseInt(value);
-			});	
-	return sum;
+	var regexp = new RegExp( tokens.separator );
+	var numbers = tokens.string.split( regexp );	
+	return _.reduce(numbers, function(memo, value) {return memo + parseInt(value);}, 0);
 }
 
 function expectAddedNumbers(string, number) {
