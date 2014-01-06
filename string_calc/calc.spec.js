@@ -12,12 +12,12 @@ function getSeparatorAndString( string ) {
 }
 
 function sumTheNumberPart( tokens ) {
-	var sum = 0;
 	var numbers = getTheNumberPart( tokens );
 	throwIfNegative( numbers );
-	return numbers
-			.filter( function(value) { return value <= 1000; } )
-			.reduce( function(memo, value) {return memo + value;} );
+	numbers = removeNumbersOver(1000, numbers);
+	if (numbers.length)
+		return numbers.reduce( function(memo, value) {return memo + value;} );
+	return 0;
 }
 
 function getTheNumberPart( tokens ) {
@@ -31,6 +31,11 @@ function throwIfNegative(numbers) {
 	var negatives = numbers.filter(function(values) { return values < 0; });
 	if (negatives.length > 0) 
 		throw "negatives not allowed:" + negatives.toString();
+}
+
+function removeNumbersOver(limit, numbers) {
+	var theLimit = limit;
+	return numbers.filter( function(value) { return value <= theLimit; } )
 }
 
 function expectAddedNumbers(string, number) {
@@ -74,5 +79,6 @@ describe("string calculator", function() {
 	
 	it("numbers greater then 1000 should be ignored", function () {
 		expectAddedNumbers("2,1001", 2);
+		expectAddedNumbers("1001", 0);
 	});
 });
