@@ -81,4 +81,8 @@ describe("string calculator", function() {
 		expectAddedNumbers("2,1001", 2);
 		expectAddedNumbers("1001", 0);
 	});
+	
+	it("delimiters can be any length", function() {
+		expectAddedNumbers("//[***]\n1***2***3",6);
+	});
 });
