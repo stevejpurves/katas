@@ -7,12 +7,12 @@ function add(string) {
 function getSeparatorAndString( string ) {
 	var matches = string.match(/\/\/(.*)\n(.*)/);
 	if (matches)
-		return { string: matches[2], separator: massageSeparators(matches) };
+		return { string: matches[2], separator: formatSeparator(matches[1]) };
 	return { string: string, separator: '[,\n]' };
 }
 
-function massageSeparators(matches) {
-	return matches[1].split("][").join("");
+function formatSeparator( separatorOptionString ) {
+	return separatorOptionString.split("][").join("");
 }
 
 
