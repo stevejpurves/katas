@@ -7,9 +7,14 @@ function add(string) {
 function getSeparatorAndString( string ) {
 	var matches = string.match(/\/\/(.*)\n(.*)/);
 	if (matches)
-		return { string: matches[2], separator: matches[1] };
+		return { string: matches[2], separator: massageSeparators(matches) };
 	return { string: string, separator: '[,\n]' };
 }
+
+function massageSeparators(matches) {
+	return matches[1].split("][").join("");
+}
+
 
 function sumTheNumberPart( tokens ) {
 	var numbers = getTheNumberPart( tokens );
@@ -84,5 +89,9 @@ describe("string calculator", function() {
 	
 	it("delimiters can be any length", function() {
 		expectAddedNumbers("//[***]\n1***2***3",6);
+	});
+	
+	it("allow multiple delimiters", function() {
+		expectAddedNumbers("//[;][%]\n1;2%3",6);
 	});
 });
