@@ -1,5 +1,3 @@
-var _ = require('underscore');
-
 function add(string) {	
 	if (string === undefined || string === "" ) 
 		return 0;
@@ -25,11 +23,8 @@ function sumTheNumberPart( tokens ) {
 
 function throwIfNegative(numbers) {
 	var negatives = numbers.filter(function(values) { return values < 0; });
-	console.log(negatives.length);
-	if (negatives.length > 0) {
-		console.log('pong');
+	if (negatives.length > 0) 
 		throw "negatives not allowed:" + negatives.toString();
-		}
 }
 
 function expectAddedNumbers(string, number) {
