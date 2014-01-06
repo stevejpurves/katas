@@ -13,12 +13,16 @@ function getSeparatorAndString( string ) {
 
 function sumTheNumberPart( tokens ) {
 	var sum = 0;
-	var regexp = new RegExp( tokens.separator );
-	var numbers = tokens.string
-					.split( regexp )
-					.map(function(value){ return parseInt(value); });
+	var numbers = getTheNumberPart( tokens );
 	throwIfNegative( numbers );
 	return numbers.reduce( function(memo, value) {return memo + value;} );
+}
+
+function getTheNumberPart( tokens ) {
+	var regexp = new RegExp( tokens.separator );
+	return tokens.string
+			.split( regexp )
+			.map(function(value){ return parseInt(value); });
 }
 
 function throwIfNegative(numbers) {
@@ -59,13 +63,16 @@ describe("string calculator", function() {
 		expect(add("1,\n2,3")).not.toBe(6);
 	});
 	
-	it("Introducing any separator character and maybe new line characters", function()
-	{
+	it("Introducing any separator character and maybe new line characters", function() {
 		expectAddedNumbers("//;\n1;2", 3);
 	});
 	
 	it("throws and exception for negative numbers", function() {
 		expectException("1,-1", "negatives not allowed:-1");
 		expectException("1,-1,-2", "negatives not allowed:-1,-2");
+	});
+	
+	it("numbers greater then 1000 should be ignored", function () {
+		expectAddedNumbers("2,1001", 2);
 	});
 });
