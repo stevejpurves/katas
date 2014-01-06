@@ -31,6 +31,10 @@ function expectAddedNumbers(string, number) {
 	expect(add(string)).toBe(number);
 }
 
+function expectException(string, exception) {
+	expect(function() { add(string); } ).toThrow(exception);
+}
+
 describe("string calculator", function() {
 	it("should return zero for an empty string", function() {
 		expectAddedNumbers("", 0);
@@ -61,6 +65,7 @@ describe("string calculator", function() {
 	});
 	
 	it("throws and exception for negative numbers", function() {
-		expect(function() { add("1,-1"); } ).toThrow("negatives not allowed:-1");
+		expectException("1,-1", "negatives not allowed:-1");
+		expectException("1,-1,-2", "negatives not allowed:-1,-2");
 	});
 });
