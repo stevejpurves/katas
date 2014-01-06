@@ -16,8 +16,20 @@ function getSeparatorAndString( string ) {
 function sumTheNumberPart( tokens ) {
 	var sum = 0;
 	var regexp = new RegExp( tokens.separator );
-	var numbers = tokens.string.split( regexp );
-	return _.reduce(numbers, function(memo, value) {return memo + parseInt(value);}, 0);
+	var numbers = tokens.string
+					.split( regexp )
+					.map(function(value){ return parseInt(value); });
+	throwIfNegative( numbers );
+	return numbers.reduce( function(memo, value) {return memo + value;} );
+}
+
+function throwIfNegative(numbers) {
+	var negatives = numbers.filter(function(values) { return values < 0; });
+	console.log(negatives.length);
+	if (negatives.length > 0) {
+		console.log('pong');
+		throw "negatives not allowed:" + negatives.toString();
+		}
 }
 
 function expectAddedNumbers(string, number) {
@@ -54,6 +66,6 @@ describe("string calculator", function() {
 	});
 	
 	it("throws and exception for negative numbers", function() {
-		expect(add("1,-1")).toThrow("negatives not allowed:-1");
+		expect(function() { add("1,-1"); } ).toThrow("negatives not allowed:-1");
 	});
 });
