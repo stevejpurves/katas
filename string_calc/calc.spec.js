@@ -15,7 +15,6 @@ function formatSeparator( separatorOptionString ) {
 	return separatorOptionString.split("][").join("");
 }
 
-
 function sumTheNumberPart( tokens ) {
 	var numbers = getTheNumberPart( tokens );
 	throwIfNegative( numbers );
@@ -93,5 +92,6 @@ describe("string calculator", function() {
 	
 	it("allow multiple delimiters", function() {
 		expectAddedNumbers("//[;][%]\n1;2%3",6);
+		expectAddedNumbers("//[;:][%-]\n1;:2%-3",6);
 	});
 });
